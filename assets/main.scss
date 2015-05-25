@@ -1,0 +1,61 @@
+@import 'normalize';
+
+body {
+  color: #555;
+  font-family: Open Sans, Helvetica, sans-serif;
+  font-size: 18px;
+  margin: 0 auto;
+  max-width: 600px;
+  width: 100%;
+  padding: 100px 0;
+  text-align: center;
+}
+
+h1, h2 {
+  color: #333;
+}
+
+h1 {
+  margin: 0 auto 2em;
+  text-transform: uppercase;
+  font-size: 3em;
+}
+h2 {
+  font-size: 2em;
+}
+
+img {
+  border: 1px solid #eaeaea;
+  display: block;
+  height: auto;
+  margin: 1em auto;
+  max-width: 80%;
+}
+
+.bookmarklet {
+  background: #f8f8f8;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+  color: #333;
+  display: inline-block;
+  font-family: Consolas, 'Liberation Mono', Courier, monospace;
+  margin: 1em auto;
+  padding: 2px 5px;
+  text-decoration: none;
+  transition: all .2s ease;
+
+  &:hover {
+    box-shadow: 0 2px 5px rgba(#000, .3);
+    transform: scale(1.2);
+  }
+}
+
+
+img,
+.bookmarklet,
+pre {
+  box-shadow: 0 1px 3px rgba(#aaa, .2);
+}
+pre {
+  text-align: left;
+}

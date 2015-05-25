@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Timer Bookmarklet</title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="assets/main.css">
+    <link rel="stylesheet" href="assets/github.css">
+</head>
+<body>
+    <h1>
+        Timer Bookmarklet
+    </h1>
+    <h2>
+        What is this?
+    </h2>
+    <p>
+        I often find myself setting timers using Google's "set timer" search keyword. So often infact, that I decided to make a bookmarklet to simplify this action.
+    </p>
+    <p>
+        If you're not familiar, this is what Google's timer looks like:
+    </p>
+    <img src="http://i.imgur.com/Mh2q2aU.png">
+    <h2>
+        How can I get it?
+    </h2>
+    <p>
+        Simply drag this bookmarklet to your Bookmarks toolbar:
+    </p>
+    <a class="bookmarklet" title="Set a timer" href="javascript:!function(t){'use strict';var r=t.prompt('For how long?'),e=r.split(' '),n=parseInt(e[0]),o='minutes';e.length>1&&(o=e[1]);var i=function(t,r){for(var e in r){var n=r[e];t=t.replace(new RegExp('{'+e+'}','g'),n)}return t},s=i('https://google.com/search?q=set+timer+for+{timer}+{units}',{timer:n,units:o});t.open(s,'_blank')}(window);">Set a timer</a>
+    <h2>
+        Woah, woah, woah, what is this JavaScript doing?
+    </h2>
+    <p>
+        You can see the uncompressed JavaScript for the bookmarklet below:
+    </p>
+    <pre><code data-language="javascript">(function (w) {
+    'use strict';
+
+    var timer_input = w.prompt('For how long?');
+    var timer_split = timer_input.split(' ');
+
+    var timer = parseInt(timer_split[0]);
+    var units = 'minutes';
+
+    if (timer_split.length > 1) {
+        units = timer_split[1];
+    }
+
+    var tpl = function(string, data) {
+        for (var token in data) {
+            var value = data[token];
+            string = string.replace(
+                new RegExp('{' + token + '}', 'g'),
+                value
+            );
+        }
+        return string;
+    };
+
+    var url = tpl(
+        'https://google.com/search?q=set+timer+for+{timer}+{units}',
+        {
+            timer: timer,
+            units: units
+        }
+    );
+
+    w.open(url, '_blank');
+}(window));</code></pre>
+    <p>
+        Have any issues? let me know on the <a href="https://github.com/omgmog/timer-bookmarklet" target="_blank">GitHub repository</a>!
+    </p>
+    <script src="assets/rainbow.min.js"></script>
+</body>
+</html>
