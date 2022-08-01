@@ -15,59 +15,27 @@
         What is this?
     </h2>
     <p>
-        I often find myself setting timers using Google's "set timer" search keyword. So often infact, that I decided to make a bookmarklet to simplify this action.
+        <s>I often find myself setting timers using Google's "set timer" search keyword. So often infact, that I decided to make a bookmarklet to simplify this action.</s>
     </p>
     <p>
-        If you're not familiar, this is what Google's timer looks like:
+        <s>If you're not familiar, this is what Google's timer looks like:</s>
     </p>
     <img src="assets/screenshot.png">
+    <h2>Update in 2022</h2>
+    <p>I originally put this together in 2015. As of 2022 it <a href="https://news.ycombinator.com/item?id=32295674">looks like Google has retired the 'timer' search feature</a>. Luckily DuckDuckGo offers the same functionality so I have updated the bookmarklet to use that instead.</p>
+    <img src="assets/screenshot-ddg.png">
     <h2>
         How can I get it?
     </h2>
     <p>
         Simply drag this bookmarklet to your Bookmarks toolbar:
     </p>
-    <a class="bookmarklet" title="Set a timer" href="javascript:!function(t){'use strict';var r=t.prompt('For how long?'),e=r.split(' '),n=parseInt(e[0]),o='minutes';e.length>1&&(o=e[1]);var i=function(t,r){for(var e in r){var n=r[e];t=t.replace(new RegExp('{'+e+'}','g'),n)}return t},s=i('https://google.com/search?q=set+timer+for+{timer}+{units}',{timer:n,units:o});t.open(s,'_blank')}(window);">Set a timer</a>
+    <a class="bookmarklet" title="Set a timer" href="javascript:(function()%7Bconst%20timer_input%20%3D%20prompt('For%20how%20long%3F')%3B%0Aopen(%60https%3A%2F%2Fduckduckgo.com%2F%3Fq%3Dtimer%2Bfor%2B%24%7Btimer_input.split('%20')%5B0%5D%7D%2B%24%7Btimer_input.split('%20')%5B1%5D%20%7C%7C%20'minutes'%7D%60%2C%20'_blank')%3B%7D)()%3B">Set a timer</a>
     <h2>
-        Woah, woah, woah, what is this JavaScript doing?
+        Bookmarklet source
     </h2>
-    <p>
-        You can see the uncompressed JavaScript for the bookmarklet below:
-    </p>
-    <pre><code data-language="javascript">(function (w) {
-    'use strict';
-
-    var timer_input = w.prompt('For how long?');
-    var timer_split = timer_input.split(' ');
-
-    var timer = parseInt(timer_split[0]);
-    var units = 'minutes';
-
-    if (timer_split.length > 1) {
-        units = timer_split[1];
-    }
-
-    var tpl = function(string, data) {
-        for (var token in data) {
-            var value = data[token];
-            string = string.replace(
-                new RegExp('{' + token + '}', 'g'),
-                value
-            );
-        }
-        return string;
-    };
-
-    var url = tpl(
-        'https://google.com/search?q=set+timer+for+{timer}+{units}',
-        {
-            timer: timer,
-            units: units
-        }
-    );
-
-    w.open(url, '_blank');
-}(window));</code></pre>
+    <pre><code data-language="javascript">const timer_input = prompt('For how long?');
+open(`https://duckduckgo.com/?q=timer+for+${timer_input.split(' ')[0]}+${timer_input.split(' ')[1] || 'minutes'}`, '_blank');</code></pre>
     <p>
         Have any issues? let me know on the <a href="https://github.com/omgmog/timer-bookmarklet" target="_blank">GitHub repository</a>!
     </p>
